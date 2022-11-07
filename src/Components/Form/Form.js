@@ -1,14 +1,22 @@
-import {useEffect, useState} from 'react';
-import axios from 'axios';
-import List from '../Selection/Selection';
-import { FormContainer, FormComponent, FormLabel, FormInput, SubmitButton, Title } from './Form.styles'
-import Success from '../Success/Success';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import List from "../Selection/Selection";
+import {
+  FormContainer,
+  FormComponent,
+  FormLabel,
+  FormInput,
+  SubmitButton,
+  Title,
+} from "./Form.styles";
+import Success from "../Success/Success";
 
 const Form = () => {
   const [states, setStates] = useState([]);
   const [occupations, setOccupations] = useState([]);
   const [user, setUser] = useState({});
   const [isComplete, setIsComplete] = useState(false);
+
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
@@ -34,7 +42,7 @@ const Form = () => {
   const handleChange = (e) => {
     setUser({ ...user, [e.target.id]: e.target.value });
     // console.log(user)
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,19 +55,20 @@ const Form = () => {
         password,
         occupation,
         state,
-      }).then(() => {
+      })
+      .then(() => {
         setIsComplete(true);
       })
       .catch((err) => console.error(err));
-  }
+  };
 
   return (
     <FormContainer>
       {isComplete ? (
-        <Success setIsComplete={setIsComplete}/>
+        <Success setIsComplete={setIsComplete} />
       ) : (
         <>
-        {/* <pre>{JSON.stringify(user, undefined, 2)}</pre> */}
+          {/* <pre>{JSON.stringify(user, undefined, 2)}</pre> */}
           <Title>Please complete form</Title>
           <FormComponent onSubmit={handleSubmit}>
             <FormLabel htmlFor="">Full Name</FormLabel>
@@ -104,11 +113,13 @@ const Form = () => {
               handleChange={handleChange}
               value={user.state}
             />
-            <SubmitButton type="submit" disabled={isDisabled}>Submit</SubmitButton>
+            <SubmitButton type="submit" disabled={isDisabled}>
+              Submit
+            </SubmitButton>
           </FormComponent>
         </>
       )}
     </FormContainer>
   );
-}
+};
 export default Form;
