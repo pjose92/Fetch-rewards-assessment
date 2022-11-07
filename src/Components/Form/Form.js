@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import axios from 'axios';
 import List from '../Selection/Selection';
 import { FormContainer, FormComponent, FormLabel, FormInput, SubmitButton, Title } from './Form.styles'
+import Success from '../Success/Success';
 
 const Form = () => {
   const [states, setStates] = useState([]);
@@ -21,7 +22,7 @@ const Form = () => {
   }, []);
 
   useEffect(() => {
-    const { fullForm: name, email, password, occupation, state } = user;
+    const { fullName: name, email, password, occupation, state } = user;
 
     if (name && email && password && occupation && state) {
       setIsDisabled(false);
@@ -32,11 +33,12 @@ const Form = () => {
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.id]: e.target.value });
+    // console.log(user)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { fullForm: name, email, password, occupation, state } = user;
+    const { fullName: name, email, password, occupation, state } = user;
 
     axios
       .post("https://frontend-take-home.fetchrewards.com/form", {
@@ -54,21 +56,18 @@ const Form = () => {
   return (
     <FormContainer>
       {isComplete ? (
-        <div className="success-wrapper">
-          <h1>Success!</h1>
-          <span className="notice">Did you need to go back?</span>
-          <button onClick={()=>setIsComplete(false)}>Go back</button>
-        </div>
+        <Success setIsComplete={setIsComplete}/>
       ) : (
         <>
+        {/* <pre>{JSON.stringify(user, undefined, 2)}</pre> */}
           <Title>Please complete form</Title>
           <FormComponent onSubmit={handleSubmit}>
             <FormLabel htmlFor="">Full Name</FormLabel>
             <FormInput
               type="textbox"
-              id="fullForm"
+              id="fullName"
               placeholder="Full Name"
-              value={user.fullForm}
+              value={user.fullName}
               onChange={handleChange}
               required
             />
