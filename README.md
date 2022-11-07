@@ -43,10 +43,11 @@ The POST endpoint will return a 201 status code if all fields are provided. The 
 Minimum Requirements
 Your site must:
 
-Display a form with inputs for each field outlined above
-Allow a user to complete and submit the form
-Do not allow form submission without completing the entire form
-Provide feedback upon successful form submission
+
+Markup: *   Display a form with inputs for each field outlined above
+        *   Allow a user to complete and submit the form
+        *   Do not allow form submission without completing the entire form
+        *   Provide feedback upon successful form submission
 
 
 -------------------------------------------
